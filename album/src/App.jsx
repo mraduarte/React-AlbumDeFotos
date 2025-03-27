@@ -11,6 +11,7 @@ function App() {
   const [query, setQuery] = useState("");
   const [categoria, setCategoria] = useState("");
   const [fotos, setFotos] = useState([]);
+  const [fotoAmpliada, setFotoAmpliada] = useState(null);
 
   const fetchData = async ({ query, categoria }) => {
     const apiKey = import.meta.env.VITE_UNSPLASH_API_KEY;
@@ -18,7 +19,7 @@ function App() {
     const response = await axios.get("https://api.unsplash.com/photos/random", {
       params: {
         client_id: apiKey,
-        count:10,
+        count: 10,
       },
     });
 
@@ -32,8 +33,10 @@ function App() {
   return (
     <div className="container">
       <Searchbar></Searchbar>
-      <FotoList fotos={fotos}/>
-      <FotoAmpliada />
+      <FotoList fotos={fotos} setFotoAmpliada={setFotoAmpliada}/>
+      {fotoAmpliada && (
+        <FotoAmpliada foto={fotoAmpliada} setFotoAmpliada={setFotoAmpliada}/>
+      )}
     </div>
   );
 }
