@@ -1,6 +1,7 @@
-import React from "react";
+import { useState } from "react";
 
-function Searchbar() {
+const SearchBar = ({ setQuery, setCategoria, setActivateSearch }) => {
+  const [localQuery, setLocalQuery] = useState("");
   const categorias = [
     "Natureza",
     "Pessoas",
@@ -11,17 +12,35 @@ function Searchbar() {
 
   return (
     <div className="search-bar">
-      <input type="text" placeholder="Pesquisar fotos..." />
-      <button>Pesquisar</button>
-      <select>
-        {categorias.map((categoria) => (
-          <option value={categoria} key={categoria}>
-            {categoria}
+      <input
+        type="text"
+        value={localQuery}
+        onChange={(e) => setLocalQuery(e.target.value)}
+        placeholder="Pesquisar fotos..."
+      />
+      <button
+        onClick={() => {
+          setQuery(localQuery);
+          setActivateSearch(true);
+        }}
+      >
+        Pesquisar
+      </button>
+      <select
+        onChange={(e) => {
+          setCategoria(e.target.value);
+          setActivateSearch(true);
+        }}
+      >
+        <option value="">Todas as categorias</option>
+        {categorias.map((cat) => (
+          <option key={cat} value={cat}>
+            {cat}
           </option>
         ))}
       </select>
     </div>
   );
-}
+};
 
-export default Searchbar;
+export default SearchBar;

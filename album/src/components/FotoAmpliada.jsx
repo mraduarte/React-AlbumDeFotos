@@ -1,6 +1,6 @@
 import React from 'react'
 
-function FotoAmpliada({foto, setFotoAmpliada}) {
+function FotoAmpliada({foto}) {
   return (
     <div className="foto-ampliada-backdrop">
         <div className="foto-ampliada-container">
